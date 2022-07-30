@@ -10,8 +10,8 @@ from inter_proc_server.config.config import settings
 
 class InterProcServer:
     """
-    The class is responsable for open a socket and get the requesties
-    and assing to request handler.
+    The class is responsible for open a socket and get the requisites
+    and assign to request handler.
 
     It is working in the async way, but it can be easily changed to be
     work in the async way.
@@ -42,14 +42,14 @@ class InterProcServer:
 
     def __open_socket(self) -> None:
         """
-        Open the socket and strat the thread to wait the connection.
+        Open the socket and start the thread to wait the connection.
         """
         try:
             self.__sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.__sock.bind((settings.IP, settings.PORT))
             self.__sock.listen()
 
-            # start the thread to handle the incoming requets
+            # start the thread to handle the incoming request
             self.__wait_conn = Thread(target=self.__wait_connection, daemon=True)
             self.__wait_conn.start()
 
@@ -58,7 +58,7 @@ class InterProcServer:
     
     def __close_socket(self) -> None:
         """
-        Join the threand to kill and close the socket
+        Join the thread to kill and close the socket
         """
         self.__wait = False
         self.__wait_conn.join()
@@ -93,8 +93,8 @@ class InterProcServer:
                     while not self.__response:
                         sleep(0.001)
 
-                    reponse = self.__response.pop(FIRST)
-                    self.__conn.sendall(bytearray(reponse))
+                    response = self.__response.pop(FIRST)
+                    self.__conn.sendall(bytearray(response))
       
                 else:
                     break

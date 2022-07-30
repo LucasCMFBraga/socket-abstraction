@@ -3,7 +3,7 @@ GCC = g++ $(CPARAMS)
 LD = g++
 
 all: client.o commands.o main.o
-	$(LD) -o main build/client.o build/py_version_command.o build/main.o
+	$(LD) -o main.o build/client.o build/py_version_command.o build/main.o
 	$(info "SUCESS COMPILED")
 client.o:
 	$(GCC) -c client/src/client.cpp -o build/client.o
