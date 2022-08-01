@@ -9,6 +9,7 @@ from inter_proc_server.entities.response_status import InvalidMessage, ResponseS
 from inter_proc_server.commands_handler.read_py_v_handler import ReadPyVHandler
 from inter_proc_server.commands_handler.plot_handler import PlotHandler
 
+
 class RequestHandler():
     """Get the incoming request and assign for a handler.
     """
@@ -35,7 +36,7 @@ class RequestHandler():
             message = InvalidMessage()
             message.error = ErrorMessage.get_message(
                 ResponseStatus.INVALID_COMMAND)
-            
+
             response = Response()
             response.status = ResponseStatus.INVALID_COMMAND.value
             memmove(response.payload, pointer(message), sizeof(message))
@@ -45,4 +46,3 @@ class RequestHandler():
         # eles handle the request and return a response
         else:
             return command.handle(request)
-

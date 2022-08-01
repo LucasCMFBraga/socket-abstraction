@@ -16,6 +16,7 @@ setup(
 
     install_requires=[
         'dynaconf==3.1.4',
+        'matplotlib==3.4.2'
     ],
     package_data={"": ["*.csv", "*.toml", "*.json"]},
     packages=find_packages(include="inter_proc_server"),

@@ -22,7 +22,7 @@ class PlotHandler(HandlerInterface):
         ax.plot(plot.axes_x, plot.axes_y)
 
         ax.set(xlabel='Time (ms)', ylabel='Voltage (mV)',
-            title='Plot from C++ array')
+               title='Plot from C++ array')
         ax.grid()
 
         fig.savefig("plot_from_c_plus.png")

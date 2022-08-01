@@ -4,19 +4,34 @@
 
 class PyVersionCommand:  public CommandInterface{
     public:
+        /**
+         * @brief Set the response object
+         * 
+         * @param response 
+         */
         void set_response(Response response);
+        
+        /**
+         * @brief Get the request object
+         * 
+         * @return Request 
+         */
         Request get_request();
 
+        /**
+         * @brief Construct a new Py Version Command object
+         * 
+         */
         PyVersionCommand();
+        
+        /**
+         * @brief Get the response object, so you can acces the response fields.
+         * 
+         * @return PyVersionEntityResponse 
+         */
         PyVersionEntityResponse get_response();
 
-        /**
-         * @brief 
-         * 
-         * @param output 
-         * @param command 
-         * @return std::ostream& 
-         */
+        // operator overloading to print the object
         friend std::ostream &operator<<(std::ostream &output, const PyVersionCommand &command){            
             output <<  "Response status: " <<  (int)command.response.status << std::endl;
             output << "Python Version: " << command.py_version_res.version << std::endl;

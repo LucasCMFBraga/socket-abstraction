@@ -3,11 +3,29 @@
 
 class PlotCommand: public CommandInterface{
     public:
+        /**
+         * @brief Set the response object
+         * 
+         * @param response 
+         */
         void set_response(Response response);
+        
+        /**
+         * @brief Get the request object
+         * 
+         * @return Request 
+         */
         Request get_request();
 
+        /**
+         * @brief Construct a new Plot Command object
+         * 
+         * @param axes_x x coordinates
+         * @param axes_y y coordinates
+         */
         PlotCommand(int32_t axes_x[127], int32_t axes_y[127]);
         
+        // operator overloading to print the object
         friend std::ostream &operator<<(std::ostream &output, const PlotCommand &command){            
             output <<  "Response status: " <<  (int)command.response.status << std::endl;
         }

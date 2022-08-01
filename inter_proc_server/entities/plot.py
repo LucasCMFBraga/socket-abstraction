@@ -1,6 +1,6 @@
 from ctypes import Structure, c_int, c_int32
 
-    
+
 class PlotRequest(Structure):
     """ Defines the plot command request payload.
     """

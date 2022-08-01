@@ -16,6 +16,7 @@ class InterProcServer:
     It is working in the async way, but it can be easily changed to be
     work in the async way.
     """
+
     def __init__(self) -> None:
         self.__request = []
         self.__response = []
@@ -50,12 +51,13 @@ class InterProcServer:
             self.__sock.listen()
 
             # start the thread to handle the incoming request
-            self.__wait_conn = Thread(target=self.__wait_connection, daemon=True)
+            self.__wait_conn = Thread(
+                target=self.__wait_connection, daemon=True)
             self.__wait_conn.start()
 
         except:
             self.__close_socket()
-    
+
     def __close_socket(self) -> None:
         """
         Join the thread to kill and close the socket
@@ -86,7 +88,7 @@ class InterProcServer:
                 if data:
 
                     # add the padding in the message to cast the message structure
-                    data += bytearray(settings.MESSAGE_SIZE - len(data)) 
+                    data += bytearray(settings.MESSAGE_SIZE - len(data))
                     message = Request.from_buffer(bytearray(data))
                     self.__request.append(message)
 
@@ -95,6 +97,6 @@ class InterProcServer:
 
                     response = self.__response.pop(FIRST)
                     self.__conn.sendall(bytearray(response))
-      
+
                 else:
                     break

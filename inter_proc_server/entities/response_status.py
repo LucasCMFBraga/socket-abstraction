@@ -1,12 +1,14 @@
 from ctypes import Structure, c_char
 from enum import Enum
 
+
 class ResponseStatus(Enum):
     """Defines the error codes.
     """
     SUCCESS = 0
     INVALID_COMMAND = 1
     BUSY = 2
+
 
 class ErrorMessage:
     """Defines the error messages.
@@ -26,6 +28,7 @@ class ErrorMessage:
         :rtype: str
         """
         return ErrorMessage.MESSAGES.get(status, "")
+
 
 class InvalidMessage(Structure):
     """Defines response status.

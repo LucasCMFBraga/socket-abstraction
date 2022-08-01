@@ -20,22 +20,43 @@
 class Client{
     public:
         int sockfd;
-        CommandInterface* command = nullptr; 
+        CommandInterface* command = nullptr;
+
+        /**
+         * @brief Construct a new Client object
+         * 
+         * @param ip IP from server to be connect.
+         * @param port Server port to be connect.
+         */
         Client(std::string ip, std::string port);
+        
+        /**
+         * @brief Construct a new Client object
+         * 
+         */
         Client();
-        ~Client();
+        
+        /**
+         * @brief send the request with current selected command. 
+         * 
+         */
         void send_request();
+        
+        /**
+         * @brief accept command to be send for client.
+         * 
+         * @param command 
+         */
         void accept_command(CommandInterface* command);
 
     private:
         char frame[MAXDATASIZE];
-
         struct addrinfo hints, *client_info;
         int rv;
         char s[INET6_ADDRSTRLEN];
 
         /**
-         * @brief Get the in addr object
+         * @brief Get the server info
          * 
          * @param sa 
          * @return void* 

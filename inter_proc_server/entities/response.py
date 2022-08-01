@@ -9,4 +9,4 @@ class Response(Structure):
     _pack_ = 1
     _fields_ = [
         ("status", c_uint8),
-        ("payload", c_uint8 * (settings.MESSAGE_SIZE -1))]
+        ("payload", c_uint8 * (settings.MESSAGE_SIZE - 1))]

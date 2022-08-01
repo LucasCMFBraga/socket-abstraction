@@ -3,11 +3,6 @@
 #include <stdint.h>
 #include "utils/constants.hpp"
 
-
-/**
- * @brief 
- * 
- */
 struct Response
 {
     uint8_t status;
