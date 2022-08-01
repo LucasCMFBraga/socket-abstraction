@@ -4,14 +4,23 @@
 
 class PyVersionCommand:  public CommandInterface{
     public:
-        Response send_request(int sockfd);
+        void set_response(Response response);
+        Request get_request();
 
-        friend std::ostream &operator<<(std::ostream &output, const CommandInterface &command){            
-            PyVersionEntityResponse py_version_res;
-            memset(&py_version_res, '\0', sizeof(py_version_res));
-            memmove(&py_version_res, &command.response.payload, sizeof(py_version_res));
+        PyVersionCommand();
+        PyVersionEntityResponse get_response();
 
+        /**
+         * @brief 
+         * 
+         * @param output 
+         * @param command 
+         * @return std::ostream& 
+         */
+        friend std::ostream &operator<<(std::ostream &output, const PyVersionCommand &command){            
             output <<  "Response status: " <<  (int)command.response.status << std::endl;
-            output << "Python Version: " << py_version_res.version << std::endl;
+            output << "Python Version: " << command.py_version_res.version << std::endl;
         }
+    private:
+        PyVersionEntityResponse py_version_res;
 };

@@ -1,3 +1,4 @@
+#pragma once
 #include "entities/request_entity.hpp"
 #include "entities/response_entity.hpp"
 #include <iostream>
@@ -6,9 +7,10 @@
 
 class CommandInterface{
     public:
+        virtual void set_response(Response Response) = 0;
+        virtual Request get_request() = 0;
+
+    protected:
         Request request;
         Response response;
-
-        virtual Response send_request(int sockfd) = 0;
-        friend std::ostream &operator<<(std::ostream &output, const CommandInterface &command);
 };

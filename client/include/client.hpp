@@ -12,26 +12,33 @@
 #include <string>
 
 #include "utils/constants.hpp"
+#include "interfaces/command_interface.hpp"
 #include "entities/request_entity.hpp"
 #include "entities/response_entity.hpp"
 
-#define PORT "65432" // the port client will be connecting to 
-#define IP "127.0.0.1"
 
 class Client{
     public:
-        int sockfd, numbytes;
+        int sockfd;
+        CommandInterface* command = nullptr; 
+        Client(std::string ip, std::string port);
+        Client();
+        ~Client();
+        void send_request();
+        void accept_command(CommandInterface* command);
+
+    private:
         char frame[MAXDATASIZE];
 
         struct addrinfo hints, *client_info;
         int rv;
         char s[INET6_ADDRSTRLEN];
 
-        Client(std::string ip, std::string port);
-        Client();
-        ~Client();
-        Response send_request();
-
-    private:
+        /**
+         * @brief Get the in addr object
+         * 
+         * @param sa 
+         * @return void* 
+         */
         void* get_in_addr(struct sockaddr *sa);
 };

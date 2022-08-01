@@ -1,14 +1,19 @@
 #include "commands/py_version_command.hpp"
-
+#include "utils/constants.hpp"
   
-Response PyVersionCommand::send_request(int sockfd){    
-    request.command = 0x01;
-    send(sockfd, &request, sizeof(request), 0);
+PyVersionCommand::PyVersionCommand(){    
+    request.command = (uint8_t)OpCode::PY_VERSION;
+}
 
-    if ((recv(sockfd, &response, MAXDATASIZE, 0)) == -1) {
-        perror("recv");
-        exit(1);
-    };
+Request PyVersionCommand::get_request(){
+    return request;
+}
 
-    return response;
+void PyVersionCommand::set_response(Response response){
+    this->response = response;
+    memmove(&py_version_res, &this->response.payload, sizeof(py_version_res));
+}
+
+PyVersionEntityResponse PyVersionCommand::get_response(){
+    return py_version_res;
 }

@@ -10,6 +10,3 @@ try:
     
 except KeyboardInterrupt:
     sys.exit()
-
-def start():
-    pass
