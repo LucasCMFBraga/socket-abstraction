@@ -37,6 +37,12 @@ class Client{
         Client();
         
         /**
+         * @brief Destroy the Client object
+         * 
+         */
+        ~Client();
+
+        /**
          * @brief send the request with current selected command. 
          * 
          */

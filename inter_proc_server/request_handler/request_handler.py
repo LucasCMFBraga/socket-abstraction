@@ -43,6 +43,6 @@ class RequestHandler():
 
             return response
 
-        # eles handle the request and return a response
+        # else handle the request and return a response
         else:
             return command.handle(request)
