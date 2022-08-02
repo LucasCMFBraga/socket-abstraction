@@ -14,7 +14,7 @@ class ReadPyVHandler(HandlerInterface):
 
         :param request: no params
         :type request: Request
-        :return: return a sucess and the python version.
+        :return: return a success and the python version.
         :rtype: Response
         """
         py_version = ReadPyVResponse()

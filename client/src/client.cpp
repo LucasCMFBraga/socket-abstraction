@@ -2,13 +2,15 @@
 
 
 Client::Client(std::string ip, std::string port){    
-    // 
+    //
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
-
+    
+    int rv;
     if ((rv = getaddrinfo(ip.c_str(), port.c_str(), &hints, &client_info)) != 0) {
         fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
+        throw ClientExceptionAddrInfo();
     }
 
     sockfd = socket(
@@ -27,8 +29,10 @@ Client::Client(){
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
 
+    int rv;
     if ((rv = getaddrinfo(IP, PORT, &hints, &client_info)) != 0) {
         fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
+        throw ClientExceptionAddrInfo();
     }
 
     sockfd = socket(

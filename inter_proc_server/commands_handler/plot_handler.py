@@ -9,11 +9,11 @@ from inter_proc_server.entities.response_status import ResponseStatus
 
 class PlotHandler(HandlerInterface):
     def handle(self, request: Request) -> Response:
-        """Handler to plot matplolib graph
+        """Handler to plot matplotlib graph
 
         :param request: params with axes_y and axes_x
         :type request: Request
-        :return: return a sucesse status and any payload.
+        :return: return a success status and any payload.
         :rtype: Response
         """
         plot = PlotRequest.from_buffer(request.payload)

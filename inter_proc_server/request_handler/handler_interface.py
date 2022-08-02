@@ -6,7 +6,7 @@ from inter_proc_server.entities.response import Response
 class HandlerInterface(ABC):
     """
     The handler interface class must be implemented by
-    all concret request handlers.
+    all concrete request handlers.
     """
     @abstractclassmethod
     def handle(self, request: Request) -> Response:

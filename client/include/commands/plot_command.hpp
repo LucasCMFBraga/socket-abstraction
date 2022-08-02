@@ -28,6 +28,7 @@ class PlotCommand: public CommandInterface{
         // operator overloading to print the object
         friend std::ostream &operator<<(std::ostream &output, const PlotCommand &command){            
             output <<  "Response status: " <<  (int)command.response.status << std::endl;
+            return output;
         }
     private:
         PlotEntityRequest plot_entity;

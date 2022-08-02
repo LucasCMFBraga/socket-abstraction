@@ -35,6 +35,7 @@ class PyVersionCommand:  public CommandInterface{
         friend std::ostream &operator<<(std::ostream &output, const PyVersionCommand &command){            
             output <<  "Response status: " <<  (int)command.response.status << std::endl;
             output << "Python Version: " << command.py_version_res.version << std::endl;
+            return output;
         }
     private:
         PyVersionEntityResponse py_version_res;

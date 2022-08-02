@@ -12,6 +12,7 @@
 #include <string>
 
 #include "utils/constants.hpp"
+#include "exception/exceptions.hpp"
 #include "interfaces/command_interface.hpp"
 #include "entities/request_entity.hpp"
 #include "entities/response_entity.hpp"
@@ -56,10 +57,7 @@ class Client{
         void accept_command(CommandInterface* command);
 
     private:
-        char frame[MAXDATASIZE];
         struct addrinfo hints, *client_info;
-        int rv;
-        char s[INET6_ADDRSTRLEN];
 
         /**
          * @brief Get the server info

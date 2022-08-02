@@ -5,6 +5,7 @@ from time import sleep
 from inter_proc_server.utils.constants import FIRST
 from inter_proc_server.request_handler.request_handler import RequestHandler
 from inter_proc_server.entities.request import Request
+from inter_proc_server.exception.exceptions import ServerBusy
 from inter_proc_server.config.config import settings
 
 
@@ -21,6 +22,7 @@ class InterProcServer:
         self.__request = []
         self.__response = []
         self.__sock = None
+        self.__wait_conn = None
         self.__wait = True
         self.__handler = RequestHandler()
 
@@ -55,15 +57,19 @@ class InterProcServer:
                 target=self.__wait_connection, daemon=True)
             self.__wait_conn.start()
 
-        except:
+        except OSError:
             self.__close_socket()
+            raise ServerBusy
 
     def __close_socket(self) -> None:
         """
         Join the thread to kill and close the socket
         """
         self.__wait = False
-        self.__wait_conn.join()
+
+        if self.__wait_conn is not None:
+            self.__wait_conn.join()
+        
         self.__sock.close()
 
     def __wait_connection(self) -> None:
