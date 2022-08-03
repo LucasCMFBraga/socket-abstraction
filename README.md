@@ -1,6 +1,6 @@
 # Abstraction for socket communication.
 
-The abstraction provides a easy to create commands for communication between server and client, so you have to create same command in the both side, client and sever. It was used the design pattern command to facilitate the addition of new commands or change the message sender  "invoker".  
+The abstraction provides a easy way to create commands for communication between server and client, so you have to create the same command in the both sides, client and sever. It was used the design pattern command to facilitate the adding of new commands or change the message sender  "invoker".  
 
 It was developed with different programing language to show the other possibilities for this template. The main point here is the concepts of abstraction, where you can easily add new command, without changes a lot the code and architecture.
 
