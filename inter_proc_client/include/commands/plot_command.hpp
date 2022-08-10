@@ -23,7 +23,7 @@ class PlotCommand: public CommandInterface{
          * @param axes_x x coordinates
          * @param axes_y y coordinates
          */
-        PlotCommand(int32_t axes_x[127], int32_t axes_y[127]);
+        PlotCommand(int32_t* axes_x, int32_t* axes_y);
         
         // operator overloading to print the object
         friend std::ostream &operator<<(std::ostream &output, const PlotCommand &command){            

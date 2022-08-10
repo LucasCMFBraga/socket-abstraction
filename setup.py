@@ -4,14 +4,14 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name="inter_proc_com",
+    name="inter-proc-com",
     author="Lucas Braga",
     author_email="lucascmf.braga@gmail.com",
     version="0.0.1",
-    description="The lib ables the comunication inter process via socket",
+    description="The lib ables the communication inter process via socket",
     long_description=long_description,
     long_description_content_type=" text/markdown",
-    keywords="Inter, processs",
+    keywords="Inter, Processes, Socket",
     license="MIT",
 
     install_requires=[

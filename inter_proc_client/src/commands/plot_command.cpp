@@ -1,7 +1,7 @@
 #include "commands/plot_command.hpp"
 #include "utils/constants.hpp"
 
-PlotCommand::PlotCommand(int32_t axes_x[127], int32_t axes_y[127]){
+PlotCommand::PlotCommand(int32_t* axes_x, int32_t* axes_y){
     request.command = (uint8_t)OpCode::PLOT;
 
     // copy the values axes values for entity

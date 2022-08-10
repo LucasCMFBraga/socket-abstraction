@@ -77,7 +77,7 @@ class InterProcServer:
         Wait for a connection and call the handler
         """
         while self.__wait:
-            print("Wating Connection")
+            print("Waiting Connection")
             self.__conn, self.__addr = self.__sock.accept()
             self.__handle_request()
 

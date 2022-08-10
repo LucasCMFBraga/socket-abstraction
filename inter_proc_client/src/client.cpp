@@ -1,7 +1,7 @@
 #include "client.hpp"
+#include <errno.h>
 
-
-Client::Client(std::string ip, std::string port){    
+Client::Client(std::string ip, std::string port) throw(){    
     //
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;
@@ -9,42 +9,45 @@ Client::Client(std::string ip, std::string port){
     
     int rv;
     if ((rv = getaddrinfo(ip.c_str(), port.c_str(), &hints, &client_info)) != 0) {
-        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
-        throw ClientExceptionAddrInfo();
+        std::cerr << "getaddrinfo: "<< gai_strerror(rv);
+        throw ClientAddrInfoException();
     }
-
+  
     sockfd = socket(
         client_info->ai_family,
         client_info->ai_socktype,
         client_info->ai_protocol);
 
-    connect(
-        sockfd,
-        client_info->ai_addr,
-        client_info->ai_addrlen);
 }
 
-Client::Client(){
+Client::Client() throw(){
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;
     hints.ai_socktype = SOCK_STREAM;
 
     int rv;
     if ((rv = getaddrinfo(IP, PORT, &hints, &client_info)) != 0) {
-        fprintf(stderr, "getaddrinfo: %s\n", gai_strerror(rv));
-        throw ClientExceptionAddrInfo();
+        std::cerr << "getaddrinfo: "<< gai_strerror(rv);
+        throw ClientAddrInfoException();
     }
 
     sockfd = socket(
-        client_info->ai_family,
-        client_info->ai_socktype,
-        client_info->ai_protocol);
+    client_info->ai_family,
+    client_info->ai_socktype,
+    client_info->ai_protocol);
 
-    connect(
-        sockfd,
-        client_info->ai_addr,
-        client_info->ai_addrlen);
+}
 
+void Client::client_connect() throw(){
+    if(connect(sockfd, client_info->ai_addr, client_info->ai_addrlen) == -1){
+        throw ClientConnectionException();
+    }
+}
+
+void Client::client_disconnect() throw(){
+    if(shutdown(sockfd, SHUT_RDWR) == -1){
+        throw ClientDisconnectionException();
+    }
 }
 
 Client::~Client(){
@@ -58,7 +61,7 @@ void* Client::get_in_addr(struct sockaddr *server_addr){
     return &(((struct sockaddr_in6*)server_addr)->sin6_addr);
 }
 
-void Client::send_request(){
+void Client::send_request() throw(){
     if(command != nullptr){
         Request request = command->get_request();
         Response response;
@@ -66,8 +69,7 @@ void Client::send_request(){
         send(sockfd, &request, sizeof(request), 0);
 
         if ((recv(sockfd, &response, MAXDATASIZE, 0)) == -1) {
-            perror("recv");
-            exit(1);
+            throw ClientRecvException();
         };
         command->set_response(response);
 
